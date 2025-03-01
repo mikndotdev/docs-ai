@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import * as crypto from 'node:crypto';
 import { compile } from '@mikandev/ssg-parser';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { ask } from './ask';
 
 const client = new S3Client({
   region: process.env.S3_REGION,
@@ -36,6 +37,16 @@ app.post('/compile', async (c) => {
   const result = await upload(data);
 
   return c.json({ url: result });
+});
+
+app.post('/ask', async (c) => {
+  const json = await c.req.json();
+  const url = json.url;
+  const question = json.question;
+
+  const response = await ask(url, question);
+
+  return c.json({ response });
 });
 
 export default app;
