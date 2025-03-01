@@ -2,9 +2,14 @@
   "name": "@docs-ai/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "nx": "nx",
+    "format": "nx format:write"
+  },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "prettier": "^3.5.2"
+  },
   "devDependencies": {
     "@nx/js": "20.4.6",
     "@swc-node/register": "~1.9.1",
